@@ -28,7 +28,7 @@ def homepage():
                 background-size: cover;
                 background-position: center;
                 background-attachment: fixed;
-            }}
+        }}
             .nav-bar {{
                 position: fixed;
                 top: 0;
@@ -42,7 +42,8 @@ def homepage():
                 justify-content: space-between;
                 box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
             }}
-            .nav-left img {{
+
+        .nav-left img {{
                 height: 60px;
             }}
             .nav-right a {{
@@ -55,22 +56,25 @@ def homepage():
             .nav-right a:hover {{
                 color: #0073e6;
             }}
-            .hero-section {{
-                position: relative;
-                width: 100%;
-                height: 90vh;
-                overflow: hidden;
-            }}
-            .hero-video {{
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 90vh;
-                object-fit: cover;
-                z-index: 1;
-            }}
-            .hero-overlay {{
+
+        .hero-section {{
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }}
+
+        .hero-video {{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }}
+
+        .hero-overlay {{
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -86,7 +90,8 @@ def homepage():
                 padding: 0 20px;
                 background-color: rgba(0, 0, 0, 0.4);
             }}
-            .hero-overlay h1 {{
+
+        .hero-overlay h1 {{
                 font-size: 3rem;
                 font-weight: bold;
                 text-shadow: 2px 2px 6px #000000;
@@ -96,7 +101,8 @@ def homepage():
                 margin-top: 1rem;
                 text-shadow: 1px 1px 4px #000000;
             }}
-            .start-btn-wrapper {{
+
+        .start-btn-wrapper {{
                 margin-top: 2rem;
                 z-index: 3;
                 text-align: center;
@@ -112,11 +118,12 @@ def homepage():
                 cursor: pointer;
                 transition: 0.3s;
             }}
-            .start-btn-wrapper button:hover {{
+
+        .start-btn-wrapper button:hover {{
                 background-color: #0074D9;
                 color: white;
-            }}
-            .split-section {{
+        }}
+        .split-section {{
                 display: flex;
                 flex-wrap: wrap;
                 background-color: rgba(255,255,255,0.95);
@@ -146,27 +153,38 @@ def homepage():
                 margin-bottom: 1rem;
                 color: #00264d;
             }}
-        </style>
 
-        <div class="nav-bar">
-            <div class="nav-left">
-                <img src="data:image/png;base64,{logo_data}" alt="Logo">
-            </div>
-            <div class="nav-right">
-                <a href="#about">About</a>
+        #MainMenu {{ visibility: hidden; }}
+        footer {{ visibility: hidden; }}
+        header {{ visibility: hidden; }}
+    </style>
+
+    <!-- NAV BAR -->
+    <div class="nav-bar">
+        <div class="nav-left">
+            <img src="data:image/png;base64,{logo_data}" alt="Logo">
+        </div>
+        <div class="nav-right">
+            <a href="#about">About</a>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <div class="hero-section">
+        <video class="hero-video" autoplay muted loop>
+            <source src="data:video/mp4;base64,{video_data}" type="video/mp4">
+        </video>
+        <div class="hero-overlay">
+            <h1>Welcome to Swetcha AI</h1>
+            <p>Your smart voice-based PDF assistant to explore, ask, and understand any document.</p>
+            <div class="start-btn-wrapper">
+                <form action="" method="post">
+                </form>
             </div>
         </div>
+    </div>
+""", unsafe_allow_html=True)
 
-        <div class="hero-section">
-            <video class="hero-video" autoplay muted loop>
-                <source src="data:video/mp4;base64,{video_data}" type="video/mp4">
-            </video>
-            <div class="hero-overlay">
-                <h1>Welcome to Voice‑Viz RAG</h1>
-                <p>Speak or type your question and get AI-powered answers with voice and video.</p>
-            </div>
-        </div>
-    """, unsafe_allow_html=True)
 
     # Start Generating Button
     with st.container():
