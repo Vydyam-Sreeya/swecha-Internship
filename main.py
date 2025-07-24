@@ -211,11 +211,14 @@ class RAGSingleLanguage:
 
         q_en = self.translate(question, 'en')
         q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
+class MyRAG:
+    def __init__(self):
+        self.chunks = []
 
-       class MyRAG:
     def answer_question(self, question: str, top_k: int = 5) -> str:
         if not self.chunks:
             return "Please select a document to query from."
+
 
         q_en = self.translate(question, 'en')
         q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
