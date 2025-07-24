@@ -214,6 +214,11 @@ class RAGSingleLanguage:
 class MyRAG:
     def __init__(self):
         self.chunks = []
+    def process_document(self, pdf_path):
+        self.chunks = self.split_pdf(pdf_path)
+        doc_language = self.detect_language(" ".join(self.chunks))
+        return doc_language
+
 
     def answer_question(self, question: str, top_k: int = 5) -> str:
         if not self.chunks:
