@@ -212,24 +212,26 @@ class RAGSingleLanguage:
         q_en = self.translate(question, 'en')
         q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
 
-       def answer_question(self, question: str, top_k: int = 5) -> str:
-    if not self.chunks:
-        return "Please select a document to query from."
+       class MyRAG:
+    def answer_question(self, question: str, top_k: int = 5) -> str:
+        if not self.chunks:
+            return "Please select a document to query from."
 
-    q_en = self.translate(question, 'en')
-    q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
+        q_en = self.translate(question, 'en')
+        q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
 
-    # Use cosine similarity
-    doc_embeds = self.embedder.encode(self.chunks, convert_to_numpy=True, normalize_embeddings=True)
-    sims = cosine_similarity(q_emb, doc_embeds)[0]
-    top_indices = sims.argsort()[::-1][:top_k]
+        doc_embeds = self.embedder.encode(self.chunks, convert_to_numpy=True, normalize_embeddings=True)
+        sims = cosine_similarity(q_emb, doc_embeds)[0]
+        top_indices = sims.argsort()[::-1][:top_k]
 
-    contexts = [
-        f"[Score: {sims[i]:.2f}]\n{self.chunks[i]}"
-        for i in top_indices
-    ]
+        contexts = [
+            f"[Score: {sims[i]:.2f}]\n{self.chunks[i]}"
+            for i in top_indices
+        ]
 
-    ctx = "\n\n".join(contexts)
+        ctx = "\n\n".join(contexts)
+
+
 
     
         prompt = (
