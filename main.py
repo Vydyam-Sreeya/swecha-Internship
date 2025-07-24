@@ -349,6 +349,9 @@ def main():
 
     # Initialize all session state variables at the top
     if 'rag' not in st.session_state:
+        st.session_state.rag = MyRAG()
+
+    if 'rag' not in st.session_state:
         st.session_state.rag = RAGSingleLanguage(GENAI_API_KEY)
     if 'logged_in' not in st.session_state:
         st.session_state.logged_in = False
