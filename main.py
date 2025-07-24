@@ -39,7 +39,7 @@ import pandas as pd
 
 # ——— Configuration ———
 GENAI_API_KEY = "AIzaSyA5xtoT9HAjH-wsa7OHFXlBjRRcXwCFBMg"
-DID_API_KEY = "a3Jpc2huYW12aXB1bEBnbWFpbC5jb20:5DSNuJuWUBZQ0G44TfJlJ"
+DID_API_KEY = "c3JlZXlhdnlkeWFtN0BnbWFpbC5jb20:m0qCDWR4CgwueagB8ripZ"
 AVATAR_IMAGE_URL = "https://raw.githubusercontent.com/de-id/live-streaming-demo/main/alex_v2_idle_image.png"
 
 # ——— SQLite DB Setup ———
