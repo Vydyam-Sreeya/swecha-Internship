@@ -341,7 +341,8 @@ def generate_did_avatar_video(answer_text: str, image_url: str) -> str:
 # ——— Main App ———
 def main():
     if 'rag' not in st.session_state:
-    st.session_state.rag = MyRAG()
+        st.session_state.rag = MyRAG()
+
     init_db()
     st.set_page_config(page_title="SpeakDoc AI: Voice-Enabled PDF Assistant with Avatar Responses", page_icon="🗣️")
     st.title("🗣️ SpeakDoc AI: Voice-Enabled PDF Assistant with Avatar Responses")
