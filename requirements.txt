@@ -8,4 +8,4 @@ google-generativeai
 gTTS
 SpeechRecognition
 requests
-faiss
+faiss-cpu==1.7.4
