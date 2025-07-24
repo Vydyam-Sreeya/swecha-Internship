@@ -39,15 +39,7 @@ import pandas as pd
 
 # ——— Configuration ———
 GENAI_API_KEY = "AIzaSyA5xtoT9HAjH-wsa7OHFXlBjRRcXwCFBMg"
-<<<<<<< HEAD
-<<<<<<< HEAD
 DID_API_KEY = "c3JlZXlhMjIwNjIwMDJAZ21haWwuY29t:JyH-DjFbnXVAxrS7OESV3" # Replace with your actual D-ID API key
-=======
-DID_API_KEY = "dnlkeWFtc3JlZXlhQGdtYWlsLmNvbQ:puEEi0w6OL3WxchUuXX--"
->>>>>>> ea5cddd30cb30df24bcfca10ba51caa540531905
-=======
-DID_API_KEY = "c3JlZXlhMjIwNjIwMDJAZ21haWwuY29t:JyH-DjFbnXVAxrS7OESV3" # Replace with your actual D-ID API key
->>>>>>> d184aa18b4700613cc122d1713458a987fc4a7fa
 AVATAR_IMAGE_URL = "https://raw.githubusercontent.com/de-id/live-streaming-demo/main/alex_v2_idle_image.png"
 
 # Ensure data directories exist
