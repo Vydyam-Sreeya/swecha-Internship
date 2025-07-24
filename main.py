@@ -35,7 +35,7 @@ import requests, time
 import sqlite3
 from datetime import datetime
 import pandas as pd
-import faiss # Import FAISS
+
 
 # ——— Configuration ———
 GENAI_API_KEY = "AIzaSyA5xtoT9HAjH-wsa7OHFXlBjRRcXwCFBMg"
