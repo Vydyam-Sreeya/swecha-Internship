@@ -35,15 +35,19 @@ import requests, time
 import sqlite3
 from datetime import datetime
 import pandas as pd
-import faiss # Import FAISS
+
 
 # ——— Configuration ———
 GENAI_API_KEY = "AIzaSyA5xtoT9HAjH-wsa7OHFXlBjRRcXwCFBMg"
+<<<<<<< HEAD
 <<<<<<< HEAD
 DID_API_KEY = "c3JlZXlhMjIwNjIwMDJAZ21haWwuY29t:JyH-DjFbnXVAxrS7OESV3" # Replace with your actual D-ID API key
 =======
 DID_API_KEY = "dnlkeWFtc3JlZXlhQGdtYWlsLmNvbQ:puEEi0w6OL3WxchUuXX--"
 >>>>>>> ea5cddd30cb30df24bcfca10ba51caa540531905
+=======
+DID_API_KEY = "c3JlZXlhMjIwNjIwMDJAZ21haWwuY29t:JyH-DjFbnXVAxrS7OESV3" # Replace with your actual D-ID API key
+>>>>>>> d184aa18b4700613cc122d1713458a987fc4a7fa
 AVATAR_IMAGE_URL = "https://raw.githubusercontent.com/de-id/live-streaming-demo/main/alex_v2_idle_image.png"
 
 # Ensure data directories exist
@@ -203,21 +207,8 @@ class RAGSingleLanguage:
             normalize_embeddings=True
         )
 
-        # Create FAISS index
-        dimension = embeddings.shape[1]
-        self.faiss_index = faiss.IndexFlatL2(dimension)
-        self.faiss_index.add(embeddings)
-        
         return doc_language # Return the detected language for saving
 
-    def load_faiss_index(self, faiss_index_path: str, document_chunks: List[str]):
-        try:
-            self.faiss_index = faiss.read_index(faiss_index_path)
-            self.chunks = document_chunks # Load associated chunks
-            return True
-        except Exception as e:
-            st.error(f"Error loading FAISS index: {e}")
-            return False
 
     def set_language(self, lang: str):
         self.language = lang
@@ -229,19 +220,26 @@ class RAGSingleLanguage:
         q_en = self.translate(question, 'en')
         q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
 
-        # Search FAISS index
-        # D, I are distances and indices respectively.
-        # For normalized embeddings, L2 distance (d) is related to cosine similarity (s) by d^2 = 2(1-s)
-        distances, indices = self.faiss_index.search(q_emb, top_k)
-        
-        contexts = []
-        for i, dist in zip(indices[0], distances[0]):
-            if i >= 0 and i < len(self.chunks): # Ensure index is valid
-                sim_score = 1 - (dist / 2) # Convert L2 distance to cosine similarity for display
-                contexts.append(f"[Score: {sim_score:.2f}]\n{self.chunks[i]}")
+       def answer_question(self, question: str, top_k: int = 5) -> str:
+    if not self.chunks:
+        return "Please select a document to query from."
 
-        ctx = "\n\n".join(contexts)
+    q_en = self.translate(question, 'en')
+    q_emb = self.embedder.encode([q_en], convert_to_numpy=True, normalize_embeddings=True)
 
+    # Use cosine similarity
+    doc_embeds = self.embedder.encode(self.chunks, convert_to_numpy=True, normalize_embeddings=True)
+    sims = cosine_similarity(q_emb, doc_embeds)[0]
+    top_indices = sims.argsort()[::-1][:top_k]
+
+    contexts = [
+        f"[Score: {sims[i]:.2f}]\n{self.chunks[i]}"
+        for i in top_indices
+    ]
+
+    ctx = "\n\n".join(contexts)
+
+    
         prompt = (
             "Answer the following question using only the provided context. "
             "Be accurate and detailed. If the answer is not present, say: "
